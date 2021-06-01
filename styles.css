@@ -63,3 +63,8 @@ body {
     color: #1E90FF;
     font-size: 1.5rem;
 }
+
+.card__button__wrapper {
+    background-color:sandybrown;
+    padding: .7rem 0;
+}

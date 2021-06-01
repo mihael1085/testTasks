@@ -12,6 +12,10 @@
 function getTimeFromMins(mins) {
     let hours = Math.trunc(mins/60);
     let minutes = mins % 60;
+	if(minutes < 10) {
+		minutes += '0'
+		console.log(minutes)
+	}
     return hours + ' ч ' + minutes + ' мин ';
 };
 
@@ -25,6 +29,7 @@ function getWeekDay(date) {
 	  let mon = date.getMonth() - 1
 	  return month[mon - 1]
   }
+  
 
 //////////////
 const segments = document.getElementById('segments')
@@ -32,22 +37,37 @@ const segments = document.getElementById('segments')
   //Event listeners
 
   const buttonsPrice = document.querySelectorAll('input[name="sortType"]')
-
-  console.log(buttonsPrice)
-
-
   
   buttonsPrice.forEach((elem) => {
 	  elem.addEventListener('change', function(event) {
+		  event.preventDefault
 		  let item = event.target.value
 		  console.log(item)
-		  res.result.flights.sort((a,b) => {
-			  console.log('a : ', a)
-			let one = a.flight.price.passengerPrices[0].total.amount
-			let two = b.flight.price.passengerPrices[0].total.amount 
-			return one == two ? 0 : one < two ? -1 : 1;
-		  })
-		  segments.innerHTML = ''
+
+		  //sort by decr
+		  if(item == 'priceEnc') {
+			res.result.flights.sort((a,b) => {
+				let one = a.flight.price.passengerPrices[0].total.amount
+				let two = b.flight.price.passengerPrices[0].total.amount 
+				return (one - two)
+			  })
+			// sort by encrease
+		  } else if(item == 'priceDecr') {
+			res.result.flights.sort((a,b) => {
+				let one = a.flight.price.passengerPrices[0].total.amount
+				let two = b.flight.price.passengerPrices[0].total.amount 
+				return (two - one)
+			  })
+			  //sort by flight duration 
+		  } else {
+			res.result.flights.sort((b,a) => {
+				let one = a.flight.price.passengerPrices[0].total.amount
+				let two = b.flight.price.passengerPrices[0].total.amount 
+				return (one - two)
+			  })
+		  }
+
+		  segments.innerHTML = '<div> </div>'
 		  render()
 	  })
   })
@@ -60,13 +80,18 @@ const segments = document.getElementById('segments')
 
 
   /////////
-
+  res.result.flights.sort((a,b) => {
+	let one = a.flight.price.passengerPrices[0].total.amount
+	let two = b.flight.price.passengerPrices[0].total.amount 
+	return (one - two)
+  })
 
 render()
 
 function render() { 
-	res.result.flights.forEach((el, index) => {
-	console.log('element:', el)
+	
+	for(let index=0; index < 10; index++) {
+	let el = res.result.flights[index]
 	let carrier = el.flight.carrier.uid
 	console.log('company ; ', carrier)
 	let html = `
@@ -81,7 +106,6 @@ function render() {
 	el.flight.legs.forEach((leg, number) => {
 		let numOfChanges = leg.segments.length
 		if(numOfChanges > 2) {
-			console.log('слишком много пересадок')
 			changes = `${leg.segments.length - 1} пересадки`
 		} else changes = ` 1 пересадка `
 		let duration = getTimeFromMins(leg.duration)
@@ -105,23 +129,19 @@ function render() {
 	
 			<br>
 			<div>Рейс выполняет: ${el.flight.carrier.caption}</div>
-			<hr>
-			<div style="text-align: center"><button> ВЫБРАТЬ </button></div>
-			<br>
 		`
-		if(number > 10) return null
 	})
+	html += `
+		<hr>
+		<div style="text-align: center" class="card__button__wrapper"><button> ВЫБРАТЬ </button></div>
+		<br>
+	`
 	let paragraph = document.createElement('div')
 	paragraph.classList.add(`route#${index}`)
 	paragraph.innerHTML = html
 	segments.appendChild(paragraph)
-})
+}
 
 }
 
-// res.result.flights[0].flight.legs[0].forEach((el, index) => {
-// 	console.log(`вылет из ${el.departureCity.caption}, прилет в ${el.arrivalCity.caption}`)
-// 	let paragraph = document.createElement('div')
-// 	paragraph.classList.add('route')
-// })
 
