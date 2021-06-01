@@ -1,0 +1,65 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.wrapper {
+    margin: 0 auto;
+    /* max-width: 1000px; */
+    min-width: 640px;
+    display: flex;
+    flex-direction: row;
+}
+
+.wrapper__filters {
+    max-width: 200px;
+    margin: 15px;
+}
+
+.wrapper__cards {
+    display: flex;
+    flex-direction: column;
+    /* min-width: 500px;
+    max-width: 1000px; */
+    width: 700px;
+}
+
+.card__header {
+    background-color: #1E90FF;
+    /* height: 3em; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: .5rem;
+}
+
+.price {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.oneLeg {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+}
+
+.uid {
+    color: #1E90FF;
+}
+
+.timing {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 1rem;
+}
+
+.time {
+    font-size: 2em;
+}
+
+.time span {
+    color: #1E90FF;
+    font-size: 1.5rem;
+}

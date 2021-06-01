@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="res.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="wrapper__filters">
+            <form action="" id="sort__price">
+                <p><b>Сортировка</b></p>
+                <p><input name="sortType" type="radio" value="priceEnc" checked> По возраствнию цены</p>
+                <p><input name="sortType" type="radio" value="priceDecr"> По убыванию цены</p>
+                <p><input name="sortType" type="radio" value="tripTime"> По времени</p>
+            </form>
+            <br>
+            <form action="" id="sort__change">
+                <p><b>Фильтровать</b></p>
+                <p><input type="checkbox" name="onlyChange">Одна пересадка</p>
+                <p><input type="checkbox" name="noChange">Без пересадок</p>
+            </form>
+            <br>
+            <form action="" id="sort__priceFrom">
+                <p><b>Цена</b></p>
+                <p>От</p><input type="text" name="priceFrom" id="">
+                <p>до</p><input type="text" name="priceFrom" id="">
+            </form>
+            <br>
+            <form action="" id="sort__carrier>
+                <p><b>Авиакомпании</b></p>
+                <p><input type="checkbox" name="onlyChange"></p>
+                <p><input type="checkbox" name="noChange"></p>
+            </form>
+        </div>
+        <div class="wrapper__cards">
+            <div class="card" id="segments">
+            </div>
+        </div>
+    
+    </div>
+    <script type="text/javascript" src="script.js"></script>
+
+</body>
+</html>
